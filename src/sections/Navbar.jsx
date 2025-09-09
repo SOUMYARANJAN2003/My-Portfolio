@@ -2,33 +2,78 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 
 function Navigation() {
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+  };
+
   return (
     <ul className="nav-ul">
       <li className="nav-li">
-        <a className="nav-link" href="#home">
+        <a 
+          className="nav-link" 
+          href="#home"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection("home");
+          }}
+        >
           Home
         </a>
       </li>
       <li className="nav-li">
-        <a className="nav-link" href="#about">
+        <a 
+          className="nav-link" 
+          href="#about"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection("about");
+          }}
+        >
           About
         </a>
       </li>
       <li className="nav-li">
-        <a className="nav-link" href="#work">
+        <a 
+          className="nav-link" 
+          href="#work"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection("work");
+          }}
+        >
           Work
         </a>
       </li>
       <li className="nav-li">
-        <a className="nav-link" href="#contact">
+        <a 
+          className="nav-link" 
+          href="#contact"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection("contact");
+          }}
+        >
           Contact
         </a>
       </li>
     </ul>
   );
 }
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  
+  // Close mobile menu when a link is clicked
+  const handleLinkClick = () => {
+    setIsOpen(false);
+  };
+
   return (
     <div className="fixed inset-x-0 z-20 w-full backdrop-blur-lg bg-primary/40">
       <div className="mx-auto c-space max-w-7xl">
@@ -62,7 +107,7 @@ const Navbar = () => {
           style={{ maxHeight: "100vh" }}
           transition={{ duration: 1 }}
         >
-          <nav className="pb-5">
+          <nav className="pb-5" onClick={handleLinkClick}>
             <Navigation />
           </nav>
         </motion.div>
